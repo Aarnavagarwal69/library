@@ -68,7 +68,7 @@ export default class TransactionScreen extends React.Component {
     db.collection("students").doc(this.state.scannedStudentId).update({
       'no._of_books_issued' : firebase.firestore.FieldValue.increment(1)
     })
-
+Alert.alert("book issued")
     this.setState({
       scannedStudentId : '',
       scannedBookId: ''
@@ -106,7 +106,7 @@ export default class TransactionScreen extends React.Component {
       transactionType=false;
     }
     else{
-      bookref.docs.map(doc=>{
+      bookref.docs.map((doc)=>{
         var book = doc.data()
       if(book.availability){
          transactionType="issued"
@@ -133,7 +133,7 @@ export default class TransactionScreen extends React.Component {
       Alert.alert("student doesn't exist in database")
     }
     else{
-studentref.docs.map(doc=>{
+studentref.docs.map((doc)=>{
   var student = doc.data();
   if (student.no._of_books_issued<2){
     studenteligible=true;
@@ -157,7 +157,7 @@ return studenteligible;
       .limit(1)
       .get();
     var isStudentEligible = "";
-    transactionRef.docs.map(doc => {
+    transactionRef.docs.map((doc) => {
       var lastBookTransaction = doc.data();
       if (lastBookTransaction.studentId === this.state.scannedStudentId) {
         isStudentEligible = true;
